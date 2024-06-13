@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Customer from "./components/Customer";
 import {
+  Container,
   Paper,
   Tab,
   Table,
@@ -9,15 +10,16 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  makeStyles,
+  Box,
 } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { Component } from "react";
 
-const useStyles = makeStyles({
+const theme = createTheme({
   root: {
-    width: '100%',
+    width: "100%",
     marginTop: 3, // theme.spacing.unit 대신 간단한 숫자 사용 가능
-    overflowX: 'auto',
+    overflowX: "auto",
   },
   table: {
     minWidth: 1080,
@@ -51,40 +53,38 @@ const customers = [
   },
 ];
 
-const App = () => {
-    const classes = useStyles();
+export default function App() {
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>번호</TableCell>
-            <TableCell>이미지</TableCell>
-            <TableCell>이름</TableCell>
-            <TableCell>생년월일</TableCell>
-            <TableCell>성별</TableCell>
-            <TableCell>직업</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {customers.map((c) => {
-            return (
-              <Customer
-                key={c.id}
-                id={c.id}
-                image={c.image}
-                name={c.name}
-                birthday={c.birthday}
-                gender={c.gender}
-                job={c.job}
-              ></Customer>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
+    <Box sx={{ minWidth: "1080px", overflowX: "auto" }}>
+      <Paper>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>번호</TableCell>
+              <TableCell>이미지</TableCell>
+              <TableCell>이름</TableCell>
+              <TableCell>생년월일</TableCell>
+              <TableCell>성별</TableCell>
+              <TableCell>직업</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {customers.map((c) => {
+              return (
+                <Customer
+                  key={c.id}
+                  id={c.id}
+                  image={c.image}
+                  name={c.name}
+                  birthday={c.birthday}
+                  gender={c.gender}
+                  job={c.job}
+                ></Customer>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+      </Box>
   );
 }
-
-
-export default App;
